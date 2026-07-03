@@ -14,69 +14,53 @@ except Exception as e:
     pass
 
 admin.site.site_header = mark_safe("""
-    Society Maintenance Admin Portal
+    <span style="color: #ffffff; font-weight: 700;">🟢 Society Care Operations Terminal</span>
     <style>
-        :root, [data-theme="dark"], [data-theme="light"], html, body {
-            --primary: #2563eb !important;
-            --secondary: #1e3a8a !important;
-            --accent: #00f2fe !important;
-            --body-bg: #0b1329 !important;
-            --body-fg: #f1f5f9 !important;
-            --border-color: #1e293b !important;
-            --darkened-bg: #0f172a !important;
-            background-color: #0b1329 !important;
-            color: #f1f5f9 !important;
+        :root, [data-theme="dark"], [data-theme="light"] {
+            --primary: #10b981 !important;
+            --secondary: #1f2937 !important;
+            --accent: #059669 !important;
+            --body-bg: #090d16 !important;
+            --body-fg: #ffffff !important;
+            --border-color: #374151 !important;
+            --darkened-bg: #111827 !important;
         }
-        
-        .theme-toggle, #theme-toggle, .header-actions, .theme-toggle-wrapper, button[dir="ltr"] {
+        .theme-toggle, #theme-toggle, .header-actions button, button[dir="ltr"] {
             display: none !important;
             visibility: hidden !important;
-            opacity: 0 !important;
         }
-        
         #header {
-            background: #2563eb !important;
-            padding: 18px 40px !important;
+            background: #111827 !important;
+            border-bottom: 2px solid #10b981 !important;
+            padding: 15px 40px !important;
         }
-        
-        #header a {
-            color: #ffffff !important;
-        }
-        
+        #header a { color: #ffffff !important; }
         .module h2, .module caption, div.breadcrumbs {
-            background: #1e3a8a !important;
-            color: #ffffff !important;
+            background: #1f2937 !important;
+            color: #10b981 !important;
             font-weight: 600 !important;
+            border-bottom: 1px solid #374151 !important;
         }
-        
-        .module {
-            background: #0f172a !important;
-            border: 1px solid #1e293b !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.4) !important;
-            margin-bottom: 25px !important;
-        }
-        
-        .module tr.row1, .module tr.row2 {
-            background: #0f172a !important;
-        }
-        
-        .module td, .module th {
-            border-bottom: 1px solid #1e293b !important;
+        body, #container, #content {
+            background-color: #090d16 !important;
             color: #ffffff !important;
         }
-        
-        .module tr:hover td {
-            background: #141e33 !important;
+        .module {
+            background: #111827 !important;
+            border: 1px solid #1f2937 !important;
+            border-radius: 8px !important;
         }
-        
-        a:link, a:visited {
-            color: #3b82f6 !important;
+        .module tr.row1, .module tr.row2 { background: #111827 !important; }
+        .module td, .module th {
+            border-bottom: 1px solid #1f2937 !important;
+            color: #ffffff !important;
         }
+        .module tr:hover td { background: #1f2937 !important; }
+        a:link, a:visited { color: #10b981 !important; }
     </style>
 """)
-admin.site.site_title = "Admin Core Engine"
-admin.site.index_title = "Welcome to Management Control Panel!"
+admin.site.site_title = "Operations Engine"
+admin.site.index_title = "System Control Dashboard"
 
 urlpatterns = [
     path('admin/', admin.site.urls),

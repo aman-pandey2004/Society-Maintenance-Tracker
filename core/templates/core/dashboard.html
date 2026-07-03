@@ -3,93 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Society Maintenance System</title>
+    <title>Operations Terminal - Society Care</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #0b1329 0%, #0f172a 100%) !important;
-            color: #f1f5f9 !important;
+            font-family: 'Inter', sans-serif;
+            background-color: #090d16 !important;
+            color: #ffffff !important;
             min-height: 100vh;
         }
         .navbar-custom {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25) !important;
+            background-color: #111827 !important;
+            border-bottom: 2px solid #10b981 !important;
         }
         .card-premium {
-            background: #0f172a !important;
-            border: 1px solid #1e293b !important;
-            border-radius: 16px !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+            background: #111827 !important;
+            border: 1px solid #1f2937 !important;
+            border-radius: 12px !important;
         }
-        .btn-gradient {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-            color: white !important;
+        .btn-emerald-submit {
+            background: #10b981 !important;
+            color: #090d16 !important;
             border: none !important;
-            border-radius: 10px !important;
-            font-weight: 600 !important;
+            font-weight: 700 !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
-        .btn-gradient:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
-            color: white !important;
+        .btn-emerald-submit:hover {
+            background: #059669 !important;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
         }
         .table-custom th {
-            background-color: #0b1329 !important;
-            color: #94a3b8 !important;
+            background-color: #1f2937 !important;
+            color: #9ca3af !important;
             font-weight: 600 !important;
             text-transform: uppercase !important;
             font-size: 0.75rem !important;
-            letter-spacing: 0.05em !important;
-            border-bottom: 1px solid #1e293b !important;
+            border-bottom: 2px solid #10b981 !important;
         }
         .table-custom td {
             color: #ffffff !important;
-            background-color: #0f172a !important;
-            border-bottom: 1px solid #1e293b !important;
-        }
-        .table-custom tbody tr, .table-custom tbody tr td {
-            background-color: #0f172a !important;
+            background-color: #111827 !important;
+            border-bottom: 1px solid #1f2937 !important;
         }
         .table-custom tbody tr:hover td {
-            background-color: #141e33 !important;
+            background-color: #172237 !important;
+            border-color: #10b981 !important;
         }
-        .form-select, .form-control, textarea, select {
-            background-color: #0b1329 !important;
-            border: 1px solid #1e293b !important;
-            color: #ffffff !important;
-        }
-        .form-select option {
-            background-color: #0b1329 !important;
+        .form-select, .form-control, textarea {
+            background-color: #1f2937 !important;
+            border: 1px solid #374151 !important;
             color: #ffffff !important;
         }
         .form-select:focus, .form-control:focus {
-            border-color: #3b82f6 !important;
-            box-shadow: none !important;
-            color: #ffffff !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2) !important;
         }
-        .text-dark { color: #ffffff !important; }
-        .text-muted { color: #94a3b8 !important; }
-        .text-secondary { color: #cbd5e1 !important; }
-        
-        .table-custom input[type="text"] {
-            background-color: #0b1329 !important;
-            border: 1px solid #1e293b !important;
-            color: #ffffff !important;
-        }
-        .table-custom .btn-light {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-            border: none !important;
-            color: #ffffff !important;
-            font-weight: 600 !important;
-        }
-        .table-custom .btn-light:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
-        }
-        .table-custom .btn-light:disabled {
-            background: #1e293b !important;
-            color: #64748b !important;
-            cursor: not-allowed !important;
+        .text-emerald { color: #10b981 !important; }
+        .text-muted { color: #9ca3af !important; }
+        .text-secondary { color: #d1d5db !important; }
+
+        .badge-status {
+            border: 1px solid #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 4px 10px;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -97,21 +77,17 @@
 
     <nav class="navbar navbar-dark navbar-custom py-3 mb-4">
         <div class="container">
-            <span class="navbar-brand mb-0 h1 fw-bold">🏢 Society Maintenance Control</span>
+            <span class="navbar-brand mb-0 h1 fw-bold">🏢 Society<span class="text-emerald">Care</span> Control</span>
             <div class="d-flex align-items-center gap-3">
                 {% if request.user.is_authenticated %}
-                    <span class="text-light small opacity-75">Welcome back, <strong>{{ request.user.username }}</strong></span>
-                    
+                    <span class="text-light small">Active Node: <strong class="text-emerald">@{{ request.user.username }}</strong></span>
                     {% if request.user.is_staff %}
-                        <a href="/admin" class="btn btn-sm btn-outline-light px-3 rounded-pill">Admin Panel</a>
+                        <a href="/admin" class="btn btn-sm btn-outline-warning px-3 rounded-pill">Admin Terminal</a>
                     {% endif %}
-                    
                     <form action="{% url 'logout' %}" method="POST" class="d-inline m-0">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-sm btn-danger px-3 rounded-pill">Logout</button>
+                        <button type="submit" class="btn btn-sm btn-outline-danger px-3 rounded-pill">Disconnect</button>
                     </form>
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-sm btn-light px-4 rounded-pill fw-bold">Login</a>
                 {% endif %}
             </div>
         </div>
@@ -120,9 +96,9 @@
     <div class="container">
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-success border-0 shadow-sm rounded-3 alert-dismissible fade show bg-primary text-white" role="alert">
+                <div class="alert alert-dismissible fade show border-0 text-dark fw-medium mb-4" role="alert" style="background-color: #10b981;">
                     ✨ {{ message }}
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}
         {% endif %}
@@ -130,16 +106,16 @@
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="card card-premium p-4">
-                    <h5 class="fw-bold mb-3 text-white">🛠️ Lodge New Complaint</h5>
-                    <p class="text-muted small">Apni samasya niche darj karein, maintenance team turant action legi.</p>
-                    <hr class="text-muted opacity-25">
+                    <h5 class="fw-bold mb-1 text-white">🛠️ Inject Fault Log</h5>
+                    <p class="text-muted small mb-3">Deploy architectural defect lines directly into central database streams.</p>
+                    <hr class="text-muted opacity-10">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="submit_complaint" value="1">
                         
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold text-secondary">Issue Category</label>
-                            <select name="category" class="form-select form-select-md rounded-3" required>
+                            <label class="form-label small fw-semibold text-secondary">Fault Stream Category</label>
+                            <select name="category" class="form-select rounded-3" required>
                                 <option value="Plumbing">Plumbing</option>
                                 <option value="Electrical">Electrical</option>
                                 <option value="Lift/Elevator">Lift Issues</option>
@@ -149,8 +125,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold text-secondary">Priority Level</label>
-                            <select name="priority" class="form-select form-select-md rounded-3">
+                            <label class="form-label small fw-semibold text-secondary">Severity Metric</label>
+                            <select name="priority" class="form-select rounded-3">
                                 <option value="Low">Low</option>
                                 <option value="Medium" selected>Medium</option>
                                 <option value="High">High (Urgent)</option>
@@ -158,157 +134,131 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold text-secondary">Upload Supporting Photo (Optional)</label>
+                            <label class="form-label small fw-semibold text-secondary">Supporting Visual Proof</label>
                             <input type="file" name="photo" class="form-control rounded-3" accept="image/*">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold text-secondary">Describe the Issue</label>
-                            <textarea name="description" class="form-control rounded-3" rows="4" placeholder="Detail me likhein..." required></textarea>
+                            <label class="form-label small fw-semibold text-secondary">Detailed Metrics Log</label>
+                            <textarea name="description" class="form-control rounded-3" rows="4" placeholder="Detail parameter failures accurately..." required></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-gradient w-100 py-2.5 shadow-sm">Submit To Board</button>
+                        <button type="submit" class="btn btn-emerald-submit w-100 py-2.5 shadow-sm">Commit Fault Log</button>
                     </form>
                 </div>
             </div>
 
             <div class="col-md-8">
-                <h4 class="fw-bold mb-3 text-white">📢 Active Circulars & Notices</h4>
+                <h4 class="fw-bold mb-3 text-white">📢 Live Broadcast Log Feed</h4>
                 <div class="row g-3">
                     {% for notice in notices %}
                     <div class="col-md-6">
-                        <div class="card card-premium h-100 border-start border-4 {% if notice.is_important %}border-danger{% else %}border-primary{% endif %}">
+                        <div class="card card-premium h-100 border-start border-4 {% if notice.is_important %}border-danger{% else %}border-success{% endif %}">
                             <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h6 class="fw-bold m-0 text-white">
-                                        {% if notice.is_important %}📌 {% endif %}{{ notice.title }}
-                                    </h6>
-                                    {% if notice.is_important %}
-                                        <span class="badge bg-danger text-white rounded-pill px-2">Pinned / Urgent</span>
-                                    {% endif %}
-                                </div>
+                                <h6 class="fw-bold text-white mb-1">{{ notice.title }}</h6>
                                 <span class="text-muted d-block small mb-3">{{ notice.created_at|date:"M d, Y" }}</span>
                                 <p class="text-secondary small card-text m-0">{{ notice.content }}</p>
                             </div>
                         </div>
                     </div>
                     {% empty %}
-                    <div class="col-12"><p class="text-muted bg-dark p-4 rounded-3 shadow-sm text-center border border-secondary">No active announcements right now.</p></div>
+                    <div class="col-12"><p class="text-muted p-4 rounded-3 text-center border border-secondary bg-transparent">Broadcast stream clear. No logs generated.</p></div>
                     {% endfor %}
                 </div>
             </div>
         </div>
 
-        <h4 class="fw-bold mt-5 mb-3 text-white">📋 Live Architecture Complaint Tracking Audit</h4>
+        <h4 class="fw-bold mt-5 mb-3 text-white">📋 Global Architectural Audit Metrics Ledger</h4>
         <div class="card card-premium p-3 mb-5">
             <div class="table-responsive">
                 <table class="table table-custom table-hover align-middle mb-0">
                     <thead>
                         <tr>
                             <th>Ticket ID</th>
-                            <th>Resident User</th>
-                            <th>Fault Category</th>
+                            <th>Origin Resident</th>
+                            <th>Fault Classification</th>
                             <th>Severity</th>
-                            <th>Status State</th>
+                            <th>Operational State</th>
                             <th>Overdue Trigger</th>
-                            <th>Admin Actions Operations</th>
+                            <th>Subsystem Commands</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for complaint in complaints %}
                         <tr data-bs-toggle="collapse" data-bs-target="#history-{{ complaint.id }}" style="cursor: pointer;">
-                            <td class="fw-bold text-muted">#{{ complaint.id }} 🔍</td>
-                            <td><span class="fw-semibold text-white">{{ complaint.resident.username }}</span></td>
+                            <td class="fw-bold text-muted">#{{ complaint.id }}</td>
+                            <td><span class="fw-semibold text-white">@{{ complaint.resident.username }}</span></td>
                             <td>
-                                <div class="d-flex flex-column gap-1">
-                                    <span class="badge bg-dark text-white border border-secondary px-2 py-1.5">{{ complaint.category }}</span>
-                                    {% if complaint.photo %}
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal{{ complaint.id }}" class="text-info x-small mt-1 text-decoration-none" onclick="event.stopPropagation();">🖼️ View Image Attachment</a>
-                                    {% endif %}
-                                </div>
+                                <span class="text-white small">{{ complaint.category }}</span>
+                                {% if complaint.photo %}
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal{{ complaint.id }}" class="text-emerald d-block small mt-1 text-decoration-none" onclick="event.stopPropagation();">🖼️ Load Matrix Proof</a>
+                                {% endif %}
                             </td>
                             <td>
-                                <span class="badge {% if complaint.priority == 'High' %}bg-danger text-white{% elif complaint.priority == 'Medium' %}bg-warning text-dark{% else %}bg-secondary{% endif %} rounded-2">
+                                <span class="badge {% if complaint.priority == 'High' %}bg-danger{% else %}bg-secondary{% endif %}">
                                     {{ complaint.priority }}
                                 </span>
                             </td>
                             <td>
-                                <span class="badge {% if complaint.status == 'Resolved' %}bg-success{% else %}bg-primary{% endif %} text-white px-2 py-1.5 rounded-pill">
+                                <span class="badge-status">
                                     ● {{ complaint.status }}
                                 </span>
                             </td>
                             <td>
                                 {% if complaint.overdue_status %}
-                                    <span class="badge bg-danger text-white fw-bold">⚠️ 5+ Days Overdue</span>
+                                    <span class="text-danger small fw-bold">⚠️ Overdue Exception</span>
                                 {% else %}
-                                    <span class="text-success small fw-medium">✓ Operational</span>
+                                    <span class="text-success small">✓ Nominal</span>
                                 {% endif %}
                             </td>
                             <td>
                                 {% if request.user.is_staff %}
                                     <form action="{% url 'update_status' complaint.id %}" method="POST" class="d-flex gap-2 align-items-center" onclick="event.stopPropagation();">
                                         {% csrf_token %}
-                                        <select name="status" class="form-select form-select-sm rounded-2 border-secondary" style="width: 120px;" {% if complaint.status == 'Resolved' %}disabled{% endif %}>
-                                            <option value="Open" {% if complaint.status == 'Open' %}selected{% endif %}>Open</option>
-                                            <option value="In Progress" {% if complaint.status == 'In Progress' %}selected{% endif %}>In Progress</option>
-                                            <option value="Resolved" {% if complaint.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                                        <select name="status" class="form-select form-select-sm" style="width: 110px;" {% if complaint.status == 'Resolved' %}disabled{% endif %}>
+                                            <option value="Open">Open</option>
+                                            <option value="In Progress">In Progress</option>
+                                            <option value="Resolved">Resolved</option>
                                         </select>
-                                        <input type="text" name="note" placeholder="Logs note..." class="form-control form-control-sm rounded-2 border-secondary" style="width: 140px;" {% if complaint.status == 'Resolved' %}disabled{% endif %}>
-                                        <button type="submit" class="btn btn-sm btn-light rounded-2 px-3" {% if complaint.status == 'Resolved' %}disabled{% endif %}>Update</button>
+                                        <input type="text" name="note" placeholder="Write logs..." class="form-control form-control-sm" style="width: 120px;" {% if complaint.status == 'Resolved' %}disabled{% endif %}>
+                                        <button type="submit" class="btn btn-sm btn-emerald-submit px-2.5" {% if complaint.status == 'Resolved' %}disabled{% endif %}>Update</button>
                                     </form>
                                 {% else %}
-                                    <span class="text-muted small">🔒 Action restricted to Admin Operations</span>
+                                    <span class="text-muted small">🔒 Secure Channel</span>
                                 {% endif %}
                             </td>
                         </tr>
 
                         <tr id="history-{{ complaint.id }}" class="collapse">
-                            <td colspan="7" class="p-3" style="background-color: #0b1329 !important;">
+                            <td colspan="7" class="p-3" style="background-color: #090d16 !important;">
                                 <div class="px-3 py-2">
-                                    <h6 class="text-primary fw-bold mb-3">📋 Complaint Lifecycle Audit Trail:</h6>
-                                    <div class="position-relative border-start border-secondary ps-4 ms-2">
+                                    <h6 class="text-emerald fw-bold mb-3">📋 Node Lifecycle Metric Audit Trail:</h6>
+                                    <div class="border-start border-secondary ps-4 ms-2">
                                         {% for log in complaint.history.all %}
-                                            <div class="mb-3 position-relative">
-                                                <div class="position-absolute rounded-circle bg-primary" style="width: 10px; height: 10px; left: -29px; top: 6px;"></div>
+                                            <div class="mb-3">
                                                 <span class="text-muted small d-block">{{ log.timestamp|date:"M d, Y H:i" }}</span>
-                                                <span class="fw-bold text-white">Status changed to: 
-                                                    <span class="badge bg-secondary px-2 py-0.5 small">{{ log.status }}</span>
-                                                </span>
-                                                {% if log.note %}
-                                                    <p class="text-secondary small m-0 mt-1">📝 <strong>Note:</strong> {{ log.note }}</p>
-                                                {% endif %}
-                                                <span class="text-muted small d-block mt-0.5">Updated by: @{{ log.actor.username }}</span>
+                                                <span class="text-white">State sequence converted to <strong class="text-emerald">[{{ log.status }}]</strong> by @{{ log.actor.username }}</span>
+                                                {% if log.note %}<p class="text-secondary small m-0 mt-1">📝 Log Comment: {{ log.note }}</p>{% endif %}
                                             </div>
                                         {% empty %}
-                                            <div class="text-muted small">No structural history data lines found.</div>
+                                            <div class="text-muted small">No lifecycle sequences compiled.</div>
                                         {% endfor %}
                                     </div>
                                 </div>
                             </td>
                         </tr>
 
-                        <div class="modal fade" id="imageModal{{ complaint.id }}" tabindex="-1" aria-hidden="true" style="z-index: 1060;">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content text-white" style="background-color: #0c1a30; border: 1px solid #1e2d4a;">
-                                    <div class="modal-header border-bottom-0">
-                                        <h5 class="modal-title fs-6 text-white">📷 Attached Proof - Ticket #{{ complaint.id }}</h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
+                        <div class="modal fade" id="imageModal{{ complaint.id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content text-white" style="background-color: #111827; border: 1px solid #1f2937;">
                                     <div class="modal-body text-center p-4">
                                         {% if complaint.photo %}
-                                            <img src="{{ complaint.photo.url }}" class="img-fluid rounded shadow-sm" alt="Complaint Attachment" style="max-height: 70vh; object-fit: contain;">
-                                        {% else %}
-                                            <p class="text-muted my-3">No active image found for this record.</p>
+                                            <img src="{{ complaint.photo.url }}" class="img-fluid rounded" style="max-height: 60vh;">
                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        {% empty %}
-                        <tr>
-                            <td colspan="7" class="text-center text-muted py-5 fs-6">No tracking lines generated yet.</td>
-                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
