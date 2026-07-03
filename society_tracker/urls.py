@@ -14,6 +14,11 @@ try:
 except Exception as e:
     pass
 
+# Admin panel par back to resident portal ka link jodne ke liye
+admin.site.site_header = "Society Care Operations Panel"
+admin.site.site_title = "Admin Core Engine"
+admin.site.index_title = "Welcome to Matrix Operations Panel"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
