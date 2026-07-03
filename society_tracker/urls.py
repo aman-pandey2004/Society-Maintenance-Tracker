@@ -6,50 +6,83 @@ from django.utils.safestring import mark_safe
 
 try:
     call_command('migrate', interactive=False)
-    
     if not User.objects.filter(username='admin').exists():
         User.objects.create_superuser('admin', 'admin@society.com', '1234')
-        
     if not User.objects.filter(username='resident').exists():
         User.objects.create_user('resident', 'resident@society.com', '1234')
 except Exception as e:
     pass
 
-# Custom CSS injection to restore the exact theme shown in 2.png
 admin.site.site_header = mark_safe("""
     Society Maintenance Admin Portal
     <style>
-        :root {
+        :root, [data-theme="dark"], [data-theme="light"], html, body {
             --primary: #2563eb !important;
             --secondary: #1e3a8a !important;
             --accent: #00f2fe !important;
             --body-bg: #0b1329 !important;
+            --body-fg: #f1f5f9 !important;
+            --border-color: #1e293b !important;
             --darkened-bg: #0f172a !important;
-        }
-        #header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
-            padding: 15px 40px !important;
-        }
-        .module h2, .module caption, div.breadcrumbs {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
-            color: #ffffff !important;
-        }
-        body, #container, #content {
             background-color: #0b1329 !important;
             color: #f1f5f9 !important;
         }
+        
+        .theme-toggle, #theme-toggle, .header-actions, .theme-toggle-wrapper {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        #header {
+            background: #2563eb !important;
+            padding: 18px 40px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        
+        #header a {
+            color: #ffffff !important;
+        }
+        
+        .module h2, .module caption, div.breadcrumbs {
+            background: #1e3a8a !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        
+        #content-main {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 24px !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+        }
+        
         .module {
             background: #0f172a !important;
             border: 1px solid #1e293b !important;
             border-radius: 8px !important;
-            overflow: hidden !important;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.4) !important;
+            margin-bottom: 25px !important;
+            width: 100% !important;
         }
+        
         .module tr.row1, .module tr.row2 {
             background: #0f172a !important;
         }
+        
+        .module td, .module th {
+            border-bottom: 1px solid #1e293b !important;
+            color: #ffffff !important;
+            padding: 12px !important;
+        }
+        
         .module tr:hover td {
             background: #141e33 !important;
         }
+        
         a:link, a:visited {
             color: #3b82f6 !important;
         }
