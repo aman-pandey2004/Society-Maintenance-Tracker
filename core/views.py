@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.contrib.auth.models import User  
 from .models import Complaint, Notice, ComplaintHistory
 
 @login_required
@@ -46,7 +47,7 @@ def dashboard(request):
 @login_required
 def update_status(request, complaint_id):
     if request.method == 'POST':
-        complaint = get_object_or_404(Complaint, id=complaint_id)
+        get_object_or_404(Complaint, id=complaint_id)
         new_status = request.POST.get('status')
         note = request.POST.get('note')
 
@@ -72,3 +73,20 @@ def update_status(request, complaint_id):
 
         messages.success(request, f"Ticket #{complaint.id} updated to {new_status}!")
     return redirect('/admin/')
+
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists! Try another.")
+            return redirect('register')
+
+        User.objects.create_user(username=username, email=email, password=password)
+        messages.success(request, "Account created successfully! Please Sign In.")
+        return redirect('login')
+
+    return render(request, 'core/register.html')
