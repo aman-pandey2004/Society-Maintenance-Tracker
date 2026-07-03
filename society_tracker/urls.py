@@ -14,7 +14,7 @@ except Exception as e:
     pass
 
 admin.site.site_header = mark_safe("""
-    <span style="color: #ffffff; font-weight: 700;">🟢 Society Care Operations Terminal</span>
+    Society Maintenance Admin Portal
     <style>
         :root, [data-theme="dark"], [data-theme="light"] {
             --primary: #10b981 !important;
@@ -45,6 +45,18 @@ admin.site.site_header = mark_safe("""
             background-color: #090d16 !important;
             color: #ffffff !important;
         }
+        
+        /* Fixing the admin login button to emerald green */
+        .login .submit-row input, div.submit-row input {
+            background: #10b981 !important;
+            color: #090d16 !important;
+            font-weight: 700 !important;
+            border: none !important;
+        }
+        .login .submit-row input:hover, div.submit-row input:hover {
+            background: #059669 !important;
+        }
+        
         .module {
             background: #111827 !important;
             border: 1px solid #1f2937 !important;
@@ -59,8 +71,8 @@ admin.site.site_header = mark_safe("""
         a:link, a:visited { color: #10b981 !important; }
     </style>
 """)
-admin.site.site_title = "Operations Engine"
-admin.site.index_title = "System Control Dashboard"
+admin.site.site_title = "Admin Portal"
+admin.site.index_title = "Welcome to Management Control Panel!"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
