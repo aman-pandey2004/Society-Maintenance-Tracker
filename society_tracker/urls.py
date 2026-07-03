@@ -28,7 +28,7 @@ admin.site.site_header = mark_safe("""
             color: #f1f5f9 !important;
         }
         
-        .theme-toggle, #theme-toggle, .header-actions, .theme-toggle-wrapper {
+        .theme-toggle, #theme-toggle, .header-actions, .theme-toggle-wrapper, button[dir="ltr"] {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
@@ -37,9 +37,6 @@ admin.site.site_header = mark_safe("""
         #header {
             background: #2563eb !important;
             padding: 18px 40px !important;
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
         }
         
         #header a {
@@ -52,21 +49,12 @@ admin.site.site_header = mark_safe("""
             font-weight: 600 !important;
         }
         
-        #content-main {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 24px !important;
-            max-width: 1200px !important;
-            margin: 0 auto !important;
-        }
-        
         .module {
             background: #0f172a !important;
             border: 1px solid #1e293b !important;
             border-radius: 8px !important;
             box-shadow: 0 4px 25px rgba(0,0,0,0.4) !important;
             margin-bottom: 25px !important;
-            width: 100% !important;
         }
         
         .module tr.row1, .module tr.row2 {
@@ -76,7 +64,6 @@ admin.site.site_header = mark_safe("""
         .module td, .module th {
             border-bottom: 1px solid #1e293b !important;
             color: #ffffff !important;
-            padding: 12px !important;
         }
         
         .module tr:hover td {
