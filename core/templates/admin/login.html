@@ -1,0 +1,23 @@
+{% extends "admin/login.html" %}
+
+{% block content %}
+{{ block.super }}
+<div style="text-align: center; margin-top: 20px;">
+    <a href="/" style="color: #00f2fe; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; transition: all 0.2s;">
+        ← Back to Resident Portal
+    </a>
+</div>
+<style>
+    div.submit-row input {
+        background: #2563eb !important;
+        border-radius: 6px !important;
+    }
+    div.submit-row input:hover {
+        background: #1d4ed8 !important;
+    }
+    a:hover {
+        text-decoration: underline !important;
+        color: #00c2cb !important;
+    }
+</style>
+{% endblock %}
