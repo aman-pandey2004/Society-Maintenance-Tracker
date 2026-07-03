@@ -90,3 +90,9 @@ def register(request):
         return redirect('login')
 
     return render(request, 'core/register.html')
+
+from django.contrib.auth import logout as django_logout
+
+def custom_logout(request):
+    django_logout(request)
+    return redirect('login')
