@@ -15,39 +15,48 @@ try:
 except Exception as e:
     pass
 
+# Custom CSS injection to restore the exact theme shown in 2.png
 admin.site.site_header = mark_safe("""
-    <span style="color: #ffffff; font-weight: 700;">🏢 Society Care Operations Panel</span>
+    Society Maintenance Admin Portal
     <style>
-        /* Admin Main Navbar Layout override */
-        #header, .navbar-custom, .module h2, .visual-island {
+        :root {
+            --primary: #2563eb !important;
+            --secondary: #1e3a8a !important;
+            --accent: #00f2fe !important;
+            --body-bg: #0b1329 !important;
+            --darkened-bg: #0f172a !important;
+        }
+        #header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+            padding: 15px 40px !important;
+        }
+        .module h2, .module caption, div.breadcrumbs {
             background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
             color: #ffffff !important;
         }
-        div.breadcrumbs {
-            background: #1e293b !important;
-            color: #cbd5e1 !important;
+        body, #container, #content {
+            background-color: #0b1329 !important;
+            color: #f1f5f9 !important;
         }
-        /* Buttons, text indicators layout links override */
-        .module th, .module caption, #content-main h2 {
+        .module {
             background: #0f172a !important;
-            color: #94a3b8 !important;
+            border: 1px solid #1e293b !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+        }
+        .module tr.row1, .module tr.row2 {
+            background: #0f172a !important;
+        }
+        .module tr:hover td {
+            background: #141e33 !important;
         }
         a:link, a:visited {
             color: #3b82f6 !important;
         }
-        /* Dashboard background panel alignment correction */
-        body, #content {
-            background: #0b1329 !important;
-            color: #f1f5f9 !important;
-        }
-        .module, .app-header {
-            background: #0f172a !important;
-            border: 1px solid #1e293b !important;
-        }
     </style>
 """)
 admin.site.site_title = "Admin Core Engine"
-admin.site.index_title = "Welcome to Operations Panel"
+admin.site.index_title = "Welcome to Management Control Panel!"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
